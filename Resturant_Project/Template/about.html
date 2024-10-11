@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block class %}class="sub_page"{% endblock class %}
+
+{% block about_status %}active{% endblock about_status %}
+
+{% block main %}
+
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div class="container  ">
+
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="{% static 'images/about-img.jpg' %} " alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                OUR PROJECT
+              </h2>
+            </div>
+           
+              
+              <div>
+                <p>
+                The SEO Poisoning Detector project is designed to identify and mitigate the risks associated with SEO poisoning. This tool leverages Google’s Custom Search API to retrieve URLs based on user queries and then analyzes each URL for SEO manipulation techniques such as keyword stuffing, hidden text, and suspicious redirects. By comparing extracted data against predefined keywords, the system classifies websites as "poisoned" or "safe" based on the frequency of these keywords and other indicators. Results are systematically saved to a CSV file for record-keeping and analysis. This project aims to enhance online security by providing users with a reliable method to detect and avoid malicious websites that exploit search engine vulnerabilities.
+              </p>
+             </div>
+             
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+{% endblock main %}

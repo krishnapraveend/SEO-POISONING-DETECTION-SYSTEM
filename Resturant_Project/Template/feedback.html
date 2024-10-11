@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block class %}class="sub_page"{% endblock class %}
+{% block feedback_status %}active{% endblock feedback_status %}
+{% block main %}
+
+<!-- start feedback form -->
+<section class="book_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2>
+        Feedback - Your feedback fuels our progress. Let us know how we're doing!
+      </h2>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form_container">
+          <form action="{% url 'feedback' %}" method='POST'>
+            {% csrf_token %}
+            <div>
+              <input type="text" class="form-control" name="user_name" required placeholder="Your Name" />
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" name="description" rows="3" required placeholder="Describe your experience here"></textarea>
+            </div>
+            <div>
+              <select class="form-control" required name="rating">
+                <option value="" disabled selected>Please Give Us Rating?</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div class="btn_box">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- Link to view all feedbacks -->
+        <div class="feedbacks_link" style="text-align: right;">
+          <a href="{% url 'all_feedbacks' %}" style="text-decoration: none; color: #0099CC; font-weight: bold;">All Feedbacks</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end feedback form -->
+
+{% endblock main %}

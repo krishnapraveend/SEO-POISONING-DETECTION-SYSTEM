@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block class %}class="sub_page"{% endblock class %}
+{% block menu_status %}active{% endblock menu_status %}
+{% load static %}
+
+{% block main %}
+<section class="food_section layout_padding-bottom">
+    <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <div class="heading_container heading_center">
+            <h2 style="font-family: Georgia, serif; font-size: 45px; color: #0099CC; font-weight: bold;"><br>SEO POISONING DETECTOR</h2><br><br>
+            <div class="search-container" style="margin-bottom: 20px; text-align: center;">
+                <form action="{% url 'Menu' %}" method="GET" style="display: flex; justify-content: center; align-items: center;">
+                    {% csrf_token %}
+                    <input type="text" name="query" placeholder="Enter your search query..." value="{{ query }}" style="padding: 10px; width: 100%; max-width: 800px; min-width: 400px; border: 2px solid #0099CC; border-radius: 5px; margin-right: 10px; font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <button type="submit" style="border: none; background: none; cursor: pointer;">
+                        <i class="fa fa-search" style="font-size: 24px; color: #0099CC;"></i>
+                    </button>
+                </form>
+            </div>
+
+            {% if query %}
+                <h2 style="font-family: Georgia, serif; font-size: 24px; color: #000000; font-weight: bold;">Search Results for "{{ query }}"</h2>
+                {% if results %}
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="flex: 1; margin-right: 30px;">
+                            <canvas id="pieChart" width="250" height="250" style="margin-left: -100px;"></canvas>
+                        </div>
+                        <div style="flex: 3;">
+                            <ul style="list-style-type: decimal; padding-left: 20px;">
+                                {% for result in results %}
+                                    <li style="margin: 10px 0; color: {% if result.poisoned %} red {% else %} blue {% endif %};">
+                                        <a href="{{ result.url }}" target="_blank" style="text-decoration: none; color: inherit;">{{ result.url }}</a>
+                                        <span>{% if result.poisoned %} - Not Safe {% else %} - Safe {% endif %}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                        var ctx = document.getElementById('pieChart').getContext('2d');
+                        var pieChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['Safe', 'Poisoned'],
+                                datasets: [{
+                                    label: 'Site Classification',
+                                    data: [{{ safe_count }}, {{ poisoned_count }}],
+                                    backgroundColor: ['#36A2EB', '#FF6384'],
+                                    hoverOffset: 4
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Summary of Safe and Poisoned Sites'
+                                    }
+                                }
+                            },
+                        });
+                    </script>
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

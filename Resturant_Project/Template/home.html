@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block home_status %}active{% endblock home_status %}
+
+{% load static %}
+
+{% block slider %}
+
+<!-- slider section -->
+<section class="slider_section ">
+  <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="container ">
+          <div class="row">
+            <div class="col-md-7 col-lg-6 ">
+              <div class="detail-box">
+                <h1>
+                  SEO POISONING DETECTOR
+                </h1>
+                <p>
+                  Our system uses Google's Custom Search API to fetch URLs and analyzes content for malicious patterns, poisoned keywords, hidden texts, and suspicious redirects. Utilizing real-time data extraction, it ensures accurate detection and website security.
+                </p>
+                <div class="btn-box">
+                  <a href="{% url 'Menu' %}" class="btn1">
+                    Get Started
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    <div class="container">
+      <ol class="carousel-indicators">
+        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+        {% comment "" %}
+        <li data-target="#customCarousel1" data-slide-to="1"></li>
+        <li data-target="#customCarousel1" data-slide-to="2"></li>
+        {% endcomment %}
+      </ol>
+    </div>
+  </div>
+</section>
+<!-- end slider section -->
+
+{% endblock slider %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block class %}class="sub_page"{% endblock class %}
+{% block feedback_status %}active{% endblock feedback_status %}
+{% block main %}
+
+<!-- start all feedbacks section -->
+<section class="all_feedbacks_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2>All Feedbacks</h2>
+    </div>
+    <div class="feedbacks_container">
+      <ul>
+        {% for feedback in feedbacks %}
+          <li>
+            <strong>{{ feedback.user_name }}</strong> (Rating: {{ feedback.rating }})
+            <p>{{ feedback.description }}</p>
+          </li>
+        {% empty %}
+          <li>No feedbacks available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- end all feedbacks section -->
+
+{% endblock main %}
