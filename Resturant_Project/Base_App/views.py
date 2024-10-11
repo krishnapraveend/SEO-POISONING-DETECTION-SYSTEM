@@ -136,7 +136,7 @@ def MenuView(request):
     poisoned_count = 0
 
     if query:
-        keywords_file = 'C:/Users/Anusha/keywords.txt'
+        keywords_file = 'keywords.txt'
         POISONED_KEYWORDS = read_keywords_from_file(keywords_file)
 
         urls = fetch_urls_from_api(query, num_results=10)
